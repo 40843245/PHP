@@ -103,4 +103,11 @@ Array
 Array ( [0] => 1 [1] => 2 [2] => 3 )
     
 # Ref
+
+The answers in stackoverflow.
+
 https://stackoverflow.com/questions/4756842/what-does-php-echo-pre-echo-pre-mean
+
+The examples in this PHP tutorial.
+
+https://www.php.net/manual/en/function.print-r.php
