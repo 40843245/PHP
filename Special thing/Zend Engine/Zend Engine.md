@@ -6,6 +6,10 @@ It consists of the Zend Virtual Machine, which is composed of the Zend Compiler 
 
 that compiles and executes the PHP code. 
 
+Zend itself really forms only the language core, 
+
+implementing PHP at its very basics with some predefined functions.
+
 ## History
 
 Zend Engine v1 : PHP 4
