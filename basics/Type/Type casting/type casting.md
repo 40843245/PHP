@@ -21,3 +21,8 @@ Note that the (unset) cast is the same as assigning the value NULL to the variab
 1. The (binary) cast and b prefix exists for forward support. 
 
 Currently (binary) and (string) are identical, however this may change and should not be relied upon.
+
+## Ref
+
+### Comparison of type casting.
+https://www.php.net/manual/en/types.comparisons.php
