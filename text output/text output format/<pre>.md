@@ -16,6 +16,11 @@ the original format of print_r() function looks like this.
         [2] => 3
     )
     
+ However, if you simply display it with print_r() function, it will display like this.
+    
+    Array ( [0] => 1 [1] => 2 [2] => 3 )
+ 
+    
     
     
 
