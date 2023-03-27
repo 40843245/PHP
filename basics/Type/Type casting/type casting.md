@@ -24,10 +24,12 @@ There are two ways.
 Note that the (unset) cast is the same as assigning the value NULL to the variable or call. 
 
 3. The (unset) cast is removed as of PHP 8.0.0.
+4. Castign to null has been DEPRECATED as of PHP 7.2.0, and REMOVED as of PHP 8.0.0. Relying on this feature is highly discouraged.
 ## Caution
 1. The (binary) cast and b prefix exists for forward support. 
 
 Currently (binary) and (string) are identical, however this may change and should not be relied upon.
+
 
 ## Ref
 
