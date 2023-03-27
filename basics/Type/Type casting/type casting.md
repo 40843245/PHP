@@ -1,4 +1,11 @@
 # type casting
+## Cast to string
+There are two ways.
+
+### method 1:
+         $s= (string) $foo;
+### method 2:
+         $s = "$foo";
 
 ## NOTE
 1. About alias of type.
