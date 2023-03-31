@@ -35,3 +35,7 @@ In this article, we will discuss what something is case-sensitive, what is NOT a
 https://stackoverflow.com/questions/33273941/php-case-sensitivity
 
 https://www.php.net/manual/en/language.variables.basics.php#language.variables.basics
+
+https://stackoverflow.com/questions/20624257/are-php-keywords-case-sensitive
+
+https://www.php.net/manual/en/language.variables.basics.php#language.variables.basics
