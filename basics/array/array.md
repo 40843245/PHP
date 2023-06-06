@@ -127,6 +127,20 @@ It is possible to swap two variables with packing and unpacking. It just hold on
 
 For more details, see Example 13.
 
+## key that contains bare string in array
+About the key that is a bare string, they may be interpreted from bare strings  (an unquoted string which does not correspond to any known symbol)  to quotate strings then E_NOTICE message throws, or they will NOT be interrepted.
+
+They will be interrupted when (either of following cases.)
+                
+                1. undefined constants.
+                2. constants that are surrounded with curly brace inside a string.
+                
+They will NOT be intterupted when (either of following cases.)
+                
+                1. defined constants.
+                2. constants that inside a string and NOT surrounded with curly brace.
+                
+For more details, see Example 18.
 
  ## NOTICE
 Here are several tips that we have to pay lots of attention on them. Although I mentioned most of them in other parts of this article, I want to tip them.
@@ -152,6 +166,9 @@ Some of tips are NOT mentioned in PHP docs.
 
 ![image](https://github.com/40843245/PHP/assets/75050655/6de9223a-fec1-43cb-981f-3db8794106d7)
 
+10. It is NOT recommend to use a key that is a bare string. Although they may be interpreted  (an unquoted string which does not correspond to any known symbol)  to quotate strings then E_NOTICE message throws, or they will NOT be interrepted, the rule of this is more compliicated. The other major reason is about the version. There are slightly difference between prior to PHP 8.0.0 and after that.
+
+For more details, see the 6th tip in the following section or PHP official docs.
 
 ## NOTICE in different version
 1. As of PHP 7.1.0, applying the empty index operator on a string throws a fatal error. Formerly, the string was silently converted to an array.
@@ -559,8 +576,51 @@ The output should be
         
 #### Explanation of Example Code
 ![image](https://github.com/40843245/PHP/assets/75050655/e721fcd4-c95e-4230-86ca-07fa684557d1)
+            
+ ### Example 16
+ #### Example Code     
+      // Show all errors
+    error_reporting(E_ALL);
+    $arr = array('fruit' => 'apple', 'veggie' => 'carrot');
+
+    // Correct
+    print $arr['fruit'];  // apple
+    print $arr['veggie']; // carrot
+
+    // Incorrect.  This works but also throws a PHP error of level E_NOTICE because
+    // of an undefined constant named fruit
+    // 
+    // Notice: Use of undefined constant fruit - assumed 'fruit' in...
+    print $arr[fruit];    // apple
+
+    // This defines a constant to demonstrate what's going on.  The value 'veggie'
+    // is assigned to a constant named fruit.
+    define('fruit', 'veggie');
+
+    // Notice the difference now
+    print $arr['fruit'];  // apple
+    print $arr[fruit];    // carrot
+
+    // The following is okay, as it's inside a string. Constants are not looked for
+    // within strings, so no E_NOTICE occurs here
+    print "Hello $arr[fruit]";      // Hello apple
+
+    // With one exception: braces surrounding arrays within strings allows constants
+    // to be interpreted
+    print "Hello {$arr[fruit]}";    // Hello carrot
+    print "Hello {$arr['fruit']}";  // Hello apple
+
+    // This will not work, and will result in a parse error, such as:
+    // Parse error: parse error, expecting T_STRING' or T_VARIABLE' or T_NUM_STRING'
+    // This of course applies to using superglobals in strings as well
+    print "Hello $arr['fruit']";
+    print "Hello $_GET['foo']";
+
+    // Concatenation is another option
+    print "Hello " . $arr['fruit']; // Hello apple  
         
-        
+#### Explanation of Example Code
+
 ## Ref
 PHP official docs.
 https://www.php.net/manual/en/language.types.array.php
