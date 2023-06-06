@@ -171,6 +171,13 @@ Some of tips are NOT mentioned in PHP docs.
 
 ![image](https://github.com/40843245/PHP/assets/75050655/112108ab-4c21-4df7-8753-84167dcf6b05)
 
+6.As of PHP 8.0.0, it has been removed and thus it is NOT allowed. Thus, it throws an Error exception.  
+This has been deprecated as of PHP 7.2.0, and thus issues an error of level E_WARNING. 
+Before PHP 7.2.0, it just issue an error of level E_NOTICE.
+
+![image](https://github.com/40843245/PHP/assets/75050655/88cb8755-f94e-42b6-a60f-5148d738d982)
+
+
  ## Example
  ### Example 1
  #### Example Code
@@ -544,6 +551,14 @@ The output should be
         [1] => 7
     )
     
+    
+ ### Example 15
+ #### Example Code     
+    $foo[bar] = 'enemy';
+    echo $foo[bar];
+        
+#### Explanation of Example Code
+![image](https://github.com/40843245/PHP/assets/75050655/e721fcd4-c95e-4230-86ca-07fa684557d1)
         
         
 ## Ref
