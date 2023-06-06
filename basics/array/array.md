@@ -113,8 +113,6 @@ The shorthand of new Array is
  Or exactly to say, 
         
         If multiple elements in the array declaration use the same key, only the last one will be used as all others are overwritten.
- 
- Such as
    
 ## Unpacking 
 It is easy to unpack the array into many variables.
@@ -122,6 +120,13 @@ Just use [], such as
         
         $array= [1,2,3];
         [$x,$y,$z]=$array;
+### Unpacking one array into many elements with spread operator (...)
+It is allowed to unpacking one array into many elements with spread operator (...).
+
+However, prior to PHP 8.1.0, it does NOT support to unpack an array which has a string key.
+
+For more details, see Example 20.
+
 ## Swapping
 It is possible to swap two variables with packing and unpacking. It just hold one statement.
 
@@ -160,15 +165,21 @@ Some of tips are NOT mentioned in PHP docs.
 11. The spread operator (...) is not supported in assignments.
 ![image](https://github.com/40843245/PHP/assets/75050655/eb370460-d149-4fa6-82c7-40ee69204d85)
 
-8. If no key is specified, the maximum of the existing int indices is taken, and the new key will be that maximum value plus 1 (but at least 0). If no int indices exist yet, the key will be 0 (zero).
+12. If no key is specified, the maximum of the existing int indices is taken, and the new key will be that maximum value plus 1 (but at least 0). If no int indices exist yet, the key will be 0 (zero).
 
-9. The maximum integer key used for this need not currently exist in the array. It need only have existed in the array at some time since the last time the array was re-indexed. 
+13. The maximum integer key used for this need not currently exist in the array. It need only have existed in the array at some time since the last time the array was re-indexed. 
 
 ![image](https://github.com/40843245/PHP/assets/75050655/6de9223a-fec1-43cb-981f-3db8794106d7)
 
-10. It is NOT recommend to use a key that is a bare string. Although they may be interpreted  (an unquoted string which does not correspond to any known symbol)  to quotate strings then E_NOTICE message throws, or they will NOT be interrepted, the rule of this is more compliicated. The other major reason is about the version. There are slightly difference between prior to PHP 8.0.0 and after that.
+14. It is NOT recommend to use a key that is a bare string. Although they may be interpreted  (an unquoted string which does not correspond to any known symbol)  to quotate strings then E_NOTICE message throws, or they will NOT be interrepted, the rule of this is more compliicated. The other major reason is about the version. There are slightly difference between prior to PHP 8.0.0 and after that.
+
+![image](https://github.com/40843245/PHP/assets/75050655/6eda8a1e-22ed-4156-8989-7956ea0aa6df)
 
 For more details, see the 6th tip in the following section or PHP official docs.
+
+15. These NUL when converting an object or a class into an array can result in some unexpected behaviour.
+
+For more details, see the Example 19.
 
 ## NOTICE in different version
 1. As of PHP 7.1.0, applying the empty index operator on a string throws a fatal error. Formerly, the string was silently converted to an array.
@@ -646,7 +657,83 @@ As the constant E_WARNING is defined as 2 in PHP.
 
 As the constant E_NOTICE is defined as 8 in PHP.
 
+ ### Example 18
+ #### Example Code     
+    class A {
+    private $B;
+    protected $C;
+    public $D;
+    function __construct()
+    {
+        $this->{1} = null;
+    }
+     }
 
+var_export((array) new A());
+        
+#### Explanation of Example Code
+The output should be 
+    
+        array (
+      '' . "\0" . 'A' . "\0" . 'B' => NULL,
+      '' . "\0" . '*' . "\0" . 'C' => NULL,
+      'D' => NULL,
+      1 => NULL,
+    )
+    
+ ### Example 19
+ #### Example Code     
+    
+    class A {
+        private $A; // This will become '\0A\0A'
+    }
+
+    class B extends A {
+        private $A; // This will become '\0B\0A'
+        public $AA; // This will become 'AA'
+    }
+
+var_dump((array) new B());
+        
+#### Explanation of Example Code
+The output should be 
+    
+        array(3) {
+      ["BA"]=>
+      NULL
+      ["AA"]=>
+      NULL
+      ["AA"]=>
+      NULL
+        }
+        
+ ### Example 20
+ #### Example Code (Prior to 8.1.0)
+    
+    $arr1 = [1, 2, 3];
+    $arr2 = ['a' => 4];
+    $arr3 = [...$arr1, ...$arr2];
+    // Fatal error: Uncaught Error: Cannot unpack array with string keys in example.php:5
+
+    $arr4 = [1, 2, 3];
+    $arr5 = [4, 5];
+    $arr6 = [...$arr4, ...$arr5]; // works. [1, 2, 3, 4, 5]
+        
+#### Explanation of Example Code
+The statements will cause fatal error since the array arr2 contains a key with a string.
+        
+        $arr1 = [1, 2, 3];
+        $arr2 = ['a' => 4];
+        $arr3 = [...$arr1, ...$arr2];
+        
+ The array arr6 will contain 6 elems.   
+         
+         0th elem: 0 is the key and corresponding value is 1.
+         1th elem: 1  is the key and corresponding value is 2.
+         2th elem: 2 is the key and corresponding value is 3.
+         3th elem: 3 is the key and corresponding value is 4.
+         4th elem: 4 is the key and corresponding value is 5.
+        
 ## Ref
 PHP official docs.
 https://www.php.net/manual/en/language.types.array.php
