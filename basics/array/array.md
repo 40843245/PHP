@@ -100,6 +100,12 @@ The shorthand of new Array is
  Just assign it like a variable. Such as
     
     $array['123'] 
+  ## Change or Insert an element with null key in array in PHP
+  1 plus The largest number of all previous keys will be the current key if the key is specified like this.
+  
+    $array[] = 1;
+  
+ For more details, see Example 14.
  
  ## Multiple keys in same array
  The value in the previous elem will be overwritten if the key is store under previous key (i.e. the previous key can implicitly cast to the current or vice versa.)
@@ -116,6 +122,11 @@ Just use [], such as
         
         $array= [1,2,3];
         [$x,$y,$z]=$array;
+## Swapping
+It is possible to swap two variables with packing and unpacking. It just hold one statement.
+
+For more details, see Example 13.
+
 
  ## NOTICE
 Here are several tips that we have to pay lots of attention on them. Although I mentioned most of them in other parts of this article, I want to tip them.
@@ -125,10 +136,21 @@ Some of tips are NOT mentioned in PHP docs.
 1. The shorthand of new Array is [].
 2. To change the value of key and insert a new key after declaration, just assign it.
 3. To remove the key after declaration, use the unset function.
-4. PHP arrays can contain int and string keys at the same time as PHP does not distinguish between indexed and associative arrays.
-5. If multiple elements in the array declaration use the same key, only the last one will be used as all others are overwritten.
-6. The comma after the last array element is optional and can be omitted.
-7. 
+4. The array starts at index 0.
+5. If the key is NOT specified at declaration, the key will be assumed to 1 plus the max number of previous keys.
+6. If key at the index 0 is NOT specified, the key will be assumed to 0.
+7. Notice about implicit cast for keys. Mentioned on above section.
+8. PHP arrays can contain int and string keys at the same time as PHP does not distinguish between indexed and associative arrays.
+9. If multiple elements in the array declaration use the same key, only the last one will be used as all others are overwritten.
+10. The comma after the last array element is optional and can be omitted.
+11. The spread operator (...) is not supported in assignments.
+![image](https://github.com/40843245/PHP/assets/75050655/eb370460-d149-4fa6-82c7-40ee69204d85)
+
+8. If no key is specified, the maximum of the existing int indices is taken, and the new key will be that maximum value plus 1 (but at least 0). If no int indices exist yet, the key will be 0 (zero).
+
+9. The maximum integer key used for this need not currently exist in the array. It need only have existed in the array at some time since the last time the array was re-indexed. 
+
+![image](https://github.com/40843245/PHP/assets/75050655/6de9223a-fec1-43cb-981f-3db8794106d7)
 
 
 ## NOTICE in different version
@@ -145,7 +167,10 @@ Some of tips are NOT mentioned in PHP docs.
  
 ![image](https://github.com/40843245/PHP/assets/75050655/7c96d1f6-22f2-454d-b5fc-96e629f37dff)
 
-5. Attempting to access an array key which has not been defined is the same as accessing any other undefined variable: an E_WARNING-level error message (E_NOTICE-level prior to PHP 8.0.0) will be issued, and the result will be null.
+5. After PHP 8.0.0, attempting to access an array key which has not been defined is the same as accessing any other undefined variable: an E_WARNING-level error message will be issued (Prior to PHP 8.0.0, E_NOTICE-level message will be issued) , and thus the result will be null.
+
+![image](https://github.com/40843245/PHP/assets/75050655/112108ab-4c21-4df7-8753-84167dcf6b05)
+
  ## Example
  ### Example 1
  #### Example Code
@@ -433,7 +458,7 @@ var_dump($array);
         
 #### Explanation of Example Code
 
-Here is an example to illustrate unpacking in array
+Here is an example to illustrate unpacking in array.
         
 It should output (in Windows environment, slightly difference in Docker container)
     
@@ -463,7 +488,7 @@ It should output (in Windows environment, slightly difference in Docker containe
         
 #### Explanation of Example Code
 
-Here is an example to illustrate unpacking in array
+Here is an example to illustrate unpacking in array.
         
 It should output (in Windows environment, slightly difference in Docker container)
     
@@ -474,5 +499,62 @@ It should output (in Windows environment, slightly difference in Docker containe
         2
         1
         
+### Example 14
+ #### Example Code     
+    // Create a simple array.
+    $array = array(1, 2, 3, 4, 5);
+    print_r($array);
+
+    // Now delete every item, but leave the array itself intact:
+    foreach ($array as $i => $value) {
+        unset($array[$i]);
+    }
+    print_r($array);
+
+    // Append an item (note that the new key is 5, instead of 0).
+    $array[] = 6;
+    print_r($array);
+
+    // Re-index:
+    $array = array_values($array);
+    $array[] = 7;
+    print_r($array);
+        
+#### Explanation of Example Code
+The output should be
+    
+     Array
+    (
+        [0] => 1
+        [1] => 2
+        [2] => 3
+        [3] => 4
+        [4] => 5
+    )
+    Array
+    (
+    )
+    Array
+    (
+        [5] => 6
+    )
+    Array
+    (
+        [0] => 6
+        [1] => 7
+    )
+    
         
         
+## Ref
+PHP official docs.
+https://www.php.net/manual/en/language.types.array.php
+
+## Advanced Reading
+
+Get all instance of a class with array.
+
+![image](https://github.com/40843245/PHP/assets/75050655/2f83df23-cfb7-4ef3-8dc6-a4c018f5a52d)
+
+
+https://stackoverflow.com/questions/475569/get-all-instances-of-a-class-in-php
