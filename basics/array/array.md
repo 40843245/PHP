@@ -140,7 +140,7 @@ They will NOT be intterupted when (either of following cases.)
                 1. defined constants.
                 2. constants that inside a string and NOT surrounded with curly brace.
                 
-For more details, see Example 18.
+For more details, see Example 16.
 
  ## NOTICE
 Here are several tips that we have to pay lots of attention on them. Although I mentioned most of them in other parts of this article, I want to tip them.
@@ -620,6 +620,32 @@ The output should be
     print "Hello " . $arr['fruit']; // Hello apple  
         
 #### Explanation of Example Code
+
+### Example 17
+#### Example Code
+The following two pieces of code are equivalent.
+        
+        <?php
+        $error_descriptions[E_ERROR]   = "A fatal error has occurred";
+        $error_descriptions[E_WARNING] = "PHP issued a warning";
+        $error_descriptions[E_NOTICE]  = "This is just an informal notice";
+        ?>
+     
+        <?php
+        $error_descriptions[1] = "A fatal error has occurred";
+        $error_descriptions[2] = "PHP issued a warning";
+        $error_descriptions[8] = "This is just an informal notice";
+        ?>
+        
+#### Explanation of Example Code
+Why two pieces of code are equivalent?
+
+As the constant E_ERROR is defined as 1 in PHP.
+
+As the constant E_WARNING is defined as 2 in PHP.
+
+As the constant E_NOTICE is defined as 8 in PHP.
+
 
 ## Ref
 PHP official docs.
