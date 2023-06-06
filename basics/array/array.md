@@ -109,11 +109,13 @@ The shorthand of new Array is
         If multiple elements in the array declaration use the same key, only the last one will be used as all others are overwritten.
  
  Such as
-    
- ##  indexed and associative arrays
-
-PHP arrays can contain int and string keys at the same time as PHP does not distinguish between indexed and associative arrays.
-
+   
+## Unpacking 
+It is easy to unpack the array into many variables.
+Just use [], such as
+        
+        $array= [1,2,3];
+        [$x,$y,$z]=$array;
 
  ## NOTICE
 Here are several tips that we have to pay lots of attention on them. Although I mentioned most of them in other parts of this article, I want to tip them.
@@ -143,9 +145,7 @@ Some of tips are NOT mentioned in PHP docs.
  
 ![image](https://github.com/40843245/PHP/assets/75050655/7c96d1f6-22f2-454d-b5fc-96e629f37dff)
 
-
-
- 
+5. Attempting to access an array key which has not been defined is the same as accessing any other undefined variable: an E_WARNING-level error message (E_NOTICE-level prior to PHP 8.0.0) will be issued, and the result will be null.
  ## Example
  ### Example 1
  #### Example Code
@@ -368,7 +368,7 @@ The array contains 8 elems.
     true => "d",
         );
         var_dump($array);
-?>
+
         
 #### Explanation of Example Code
 The array contains 1 elems.
@@ -392,7 +392,6 @@ The output will be
     100   => -100,
     -100  => 100,
 );
-?>
         
 #### Explanation of Example Code
 
@@ -420,3 +419,60 @@ The output will be
 var_dump($array); 
  ![image](https://github.com/40843245/PHP/assets/75050655/56495196-a11d-4fc1-bb71-b50e2d64db57)
 
+### Example 12
+ #### Example Code     
+        $source_array = ['foo' => 1, 'bar' => 2, 'baz' => 3];
+        ['baz' => $three] = $source_array;
+        echo $three;   
+        echo "\n";
+        
+        $source_array = ['foo', 'bar', 'baz'];
+        [2 => $baz] = $source_array;
+        echo $baz;
+        echo "\n";
+        
+#### Explanation of Example Code
+
+Here is an example to illustrate unpacking in array
+        
+It should output (in Windows environment, slightly difference in Docker container)
+    
+        3 
+        "baz"
+        
+ ### Example 13
+ #### Example Code     
+        $a = 1;
+        $b = 2;
+
+        echo "Before";  
+        echo "\n";
+        echo $a;   
+        echo "\n";
+        echo $b;  
+        echo "\n";
+        
+        [$b, $a] = [$a, $b];
+
+        echo "After";  
+        echo "\n";
+        echo $a;   
+        echo "\n";
+        echo $b;  
+        echo "\n";
+        
+#### Explanation of Example Code
+
+Here is an example to illustrate unpacking in array
+        
+It should output (in Windows environment, slightly difference in Docker container)
+    
+        "Before"
+        1
+        2
+        "After"
+        2
+        1
+        
+        
+        
