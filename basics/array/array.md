@@ -50,13 +50,16 @@ The shorthand of new Array is
         3. boolean (Does it occur in PHP? Yes.)
         
         4. null (Does it occur in PHP? Yes.)
-        
+ 
+ However, the key will be implicitly casted in special case.
  In PHP, a key of an array can NOT be one of the following:
  
         1. array
         
         2. class
-        
+  
+  ![image](https://github.com/40843245/PHP/assets/75050655/3d4c2fe2-80cc-4100-8db9-4aadf7ca8444)
+
  ## Change or Insert an element in array in PHP
  
  In PHP, it is easy to change or insert an element in array.
