@@ -25,7 +25,7 @@ The shorthand of new Array is
         
         assign the key and value together.
    
-  For more understanding, see the example and its explanation in Example section.
+ For more understanding, see the example and its explanation in Example section.
   
  ## Example
  ### Example 1
@@ -53,12 +53,48 @@ The array contains 3 elems.
             4 => 6
         );
 #### Explanation of Example Code
-The array contains 3 elems.
+The array contains 4 elems.
 
     0th elem: 1 is the key and the corresponding value is 1.
     1th elem: 2 is the key and the corresponding value is -1.
     2th elem: 3 is the key and the corresponding value is 3.
     3th elem: 4 is the key and the corresponding value is -6.
+    
+ ### Example 3
+ #### Example Code
+    
+        new Array(
+            1 => 1,
+            2 => -1,
+            3 => 3,
+                 6
+        );
+#### Explanation of Example Code
+The array contains 4 elems.
 
- 
+    0th elem: 1 is the key and the corresponding value is 1.
+    1th elem: 2 is the key and the corresponding value is -1.
+    2th elem: 3 is the key and the corresponding value is 3.
+    3th elem: 4 is the key and the corresponding value is -6.
+  
+ ### Example 4
+ #### Example Code
+    
+        new Array(
+            1 =>  1,
+            2 => -1,
+                  3,
+            15 => 6,
+                   7
+        );
+#### Explanation of Example Code
+The array contains 5 elems.
+
+    0th elem: 1 is the key and the corresponding value is 1.
+    1th elem: 2 is the key and the corresponding value is -1.
+    2th elem: 3 is the key and the corresponding value is 3.
+    3th elem: 15 is the key and the corresponding value is 6.
+    4th elem: 16 is the key and the corresponding value is 7.
+    
+
  
