@@ -155,14 +155,16 @@ Some of tips are NOT mentioned in PHP docs.
 1. The shorthand of new Array is [].
 2. To change the value of key and insert a new key after declaration, just assign it.
 3. To remove the key after declaration, use the unset function.
-4. The array starts at index 0.
-5. If the key is NOT specified at declaration, the key will be assumed to 1 plus the max number of previous keys.
-6. If key at the index 0 is NOT specified, the key will be assumed to 0.
-7. Notice about implicit cast for keys. Mentioned on above section.
-8. PHP arrays can contain int and string keys at the same time as PHP does not distinguish between indexed and associative arrays.
-9. If multiple elements in the array declaration use the same key, only the last one will be used as all others are overwritten.
-10. The comma after the last array element is optional and can be omitted.
-11. The spread operator (...) is not supported in assignments.
+4. Although the key can NOT be an array or an object, it is NOT stricted for values (i.e. value cmay be array or objetc etc.)
+5. The key at declaration also can be expression. See Noticifaction section below.
+6. The array starts at index 0.
+7. If the key is NOT specified at declaration, the key will be assumed to 1 plus the max number of previous keys.
+8. If key at the index 0 is NOT specified, the key will be assumed to 0.
+9. Notice about implicit cast for keys. Mentioned on above section.
+10. PHP arrays can contain int and string keys at the same time as PHP does not distinguish between indexed and associative arrays.
+11. If multiple elements in the array declaration use the same key, only the last one will be used as all others are overwritten.
+12. The comma after the last array element is optional and can be omitted.
+13. The spread operator (...) is not supported in assignments.
 ![image](https://github.com/40843245/PHP/assets/75050655/eb370460-d149-4fa6-82c7-40ee69204d85)
 
 12. If no key is specified, the maximum of the existing int indices is taken, and the new key will be that maximum value plus 1 (but at least 0). If no int indices exist yet, the key will be 0 (zero).
@@ -180,6 +182,8 @@ For more details, see the 6th tip in the following section or PHP official docs.
 15. These NUL when converting an object or a class into an array can result in some unexpected behaviour.
 
 For more details, see the Example 19.
+
+
 
 ## NOTICE in different version
 1. As of PHP 7.1.0, applying the empty index operator on a string throws a fatal error. Formerly, the string was silently converted to an array.
@@ -732,7 +736,77 @@ The statements will cause fatal error since the array arr2 contains a key with a
          1th elem: 1  is the key and corresponding value is 2.
          2th elem: 2 is the key and corresponding value is 3.
          3th elem: 3 is the key and corresponding value is 4.
-         4th elem: 4 is the key and corresponding value is 5.
+          4th elem: 4 is the key and corresponding value is 5.
+  
+ ### Example 21
+ #### Example Code
+  
+             $a = array( 'color' => 'red',
+                    'taste' => 'sweet',
+                    'shape' => 'round',
+                    'name'  => 'apple',
+                    4       
+                  );
+                  
+
+It is completely equivalent with this:
+
+            $a = array();
+            $a['color'] = 'red';
+            $a['taste'] = 'sweet';
+            $a['shape'] = 'round';
+            $a['name']  = 'apple';
+            $a[]        = 4;     
+#### Explanation of Example Code
+The output should be 
+        
+        array('color' => 'red', 'taste' => 'sweet', 'shape' => 'round', 
+        // 'name' => 'apple', 0 => 4)
+        
+ ### Example 22
+ #### Example Code
+  
+          $b = array('a', 'b', 'c');
+          
+It is completely equivalent with this:
+            
+            $b = array('a', 'b', 'c');
+
+It is completely equivalent with this:
+
+            $b = array();
+        $b[] = 'a';
+        $b[] = 'b';
+        $b[] = 'c'; 
+ ### Example 23
+  #### Example Code
+    function Dim_Ar($A, $i){
+        if(!is_array($A))return 0;
+    $t[] = 1;
+    foreach($A AS $e)if(is_array($e))$t[] = Dim_Ar($e, ++ $i) + 1;
+    return max($t);
+    }
+
+and use with:
+
+$Q = ARRAY(ARRAY(ARRAY()), ARRAY(ARRAY()));// here depth/dimension is three
+
+echo Dim_Ar($Q, 0);
+#### Explanation of Example Code
+The output should be 
+        
+        3
+
+ ### Example 24
+  #### Example Code
+       $a = array(
+        1     =>0,
+        1+1   =>1,
+        $k    =>2,
+        $x.'4'=>3
+      );
+#### Explanation of Example Code
+The key can be an expression.
         
 ## Ref
 PHP official docs.
