@@ -116,14 +116,34 @@ PHP arrays can contain int and string keys at the same time as PHP does not dist
 
 
  ## NOTICE
-Here are several tips that we have to pay lots of attention on them. Although I mentioned them in other parts of this article, I want to tip them.
+Here are several tips that we have to pay lots of attention on them. Although I mentioned most of them in other parts of this article, I want to tip them.
 
 Some of tips are NOT mentioned in PHP docs.
 
-1. PHP arrays can contain int and string keys at the same time as PHP does not distinguish between indexed and associative arrays.
-2. If multiple elements in the array declaration use the same key, only the last one will be used as all others are overwritten.
-3. The comma after the last array element is optional and can be omitted.
-4. The shorthand of new Array is [].
+1. The shorthand of new Array is [].
+2. To change the value of key and insert a new key after declaration, just assign it.
+3. To remove the key after declaration, use the unset function.
+4. PHP arrays can contain int and string keys at the same time as PHP does not distinguish between indexed and associative arrays.
+5. If multiple elements in the array declaration use the same key, only the last one will be used as all others are overwritten.
+6. The comma after the last array element is optional and can be omitted.
+7. 
+
+
+## NOTICE in different version
+1. As of PHP 7.1.0, applying the empty index operator on a string throws a fatal error. Formerly, the string was silently converted to an array.
+
+![image](https://github.com/40843245/PHP/assets/75050655/baa5de0a-673b-4747-b5c0-0bbd6b2232fb)
+
+2. Prior to PHP 8.0.0, square brackets and curly braces could be used interchangeably for accessing array elements (e.g. $array[42] and $array{42} would both do the same thing in the example above). The curly brace syntax was deprecated as of PHP 7.4.0 and no longer supported as of PHP 8.0.0. Illustrated in the following figure.
+
+![image](https://github.com/40843245/PHP/assets/75050655/1e31fed7-eca1-4e69-abd2-c81452ef31fc)
+
+3. As of PHP 8.1.0, creating a new array from false value is deprecated. 
+4. Creating a new array from null and undefined values is still allowed.
+ 
+![image](https://github.com/40843245/PHP/assets/75050655/7c96d1f6-22f2-454d-b5fc-96e629f37dff)
+
+
 
  
  ## Example
