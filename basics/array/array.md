@@ -116,6 +116,16 @@ PHP arrays can contain int and string keys at the same time as PHP does not dist
 
 
  ## NOTICE
+Here are several tips that we have to pay lots of attention on them. Although I mentioned them in other parts of this article, I want to tip them.
+
+Some of tips are NOT mentioned in PHP docs.
+
+1. PHP arrays can contain int and string keys at the same time as PHP does not distinguish between indexed and associative arrays.
+2. If multiple elements in the array declaration use the same key, only the last one will be used as all others are overwritten.
+3. The comma after the last array element is optional and can be omitted.
+4. The shorthand of new Array is [].
+
+ 
  ## Example
  ### Example 1
  #### Example Code
