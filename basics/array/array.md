@@ -29,20 +29,36 @@ The shorthand of new Array is
   
  ## Example
  ### Example 1
- #### Example 
+ #### Example Code
     
         new Array(
             'a1' => 1,
             'a2' => 2,
             'a3' => 3
         );
-#### Explanation of Example
+#### Explanation of Example Code
 The array contains 3 elems.
 
     0th elem: 'a1' is the key and the corresponding value is 1.
     1th elem: 'a2' is the key and the corresponding value is 2.
     2th elem: 'a3' is the key and the corresponding value is 3.
- 
- 
+    
+ ### Example 2   
+ #### Example Code
+    
+        new Array(
+            1 => 1,
+            2 => -1,
+            3 => 3,
+            4 => 6
+        );
+#### Explanation of Example Code
+The array contains 3 elems.
+
+    0th elem: 1 is the key and the corresponding value is 1.
+    1th elem: 2 is the key and the corresponding value is -1.
+    2th elem: 3 is the key and the corresponding value is 3.
+    3th elem: 4 is the key and the corresponding value is -6.
+
  
  
