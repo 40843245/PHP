@@ -110,7 +110,12 @@ The shorthand of new Array is
  
  Such as
     
- 
+ ##  indexed and associative arrays
+
+PHP arrays can contain int and string keys at the same time as PHP does not distinguish between indexed and associative arrays.
+
+
+ ## NOTICE
  ## Example
  ### Example 1
  #### Example Code
@@ -349,6 +354,39 @@ The output will be
         
  The reason why it is the value with the key "1" will be overwritten as "1" contain integer,  the value with the key 1.5 as 1.5 can be truncated to 1, and the value the key true will be overwritten as true can implicity cast to 1.
  
+  ### Example 11
+ #### Example Code     
+    $array = array(
+    "foo" => "bar",
+    "bar" => "foo",
+    100   => -100,
+    -100  => 100,
+);
+?>
+        
+#### Explanation of Example Code
+
+Here is an example to illustrate the fact that
+        
+        PHP arrays can contain int and string keys at the same time as PHP does not distinguish between indexed and associative arrays.
+The array contains 1 elems.
+
+    0th elem: 1 is the key and the corresponding value is "d".
  
+The output will be
+
+    array(4) {
+    ["foo"]=>
+    string(3) "bar"
+    ["bar"]=>
+    string(3) "foo"
+    [100]=>
+    int(-100)
+    [-100]=>
+    int(100)
+    }
+        
+
+var_dump($array); 
  ![image](https://github.com/40843245/PHP/assets/75050655/56495196-a11d-4fc1-bb71-b50e2d64db57)
 
